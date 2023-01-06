@@ -37,3 +37,21 @@ export const getUpdatedWatchList = (setWatch) => {
         .then((res) => res.json())
         .then(data => setWatch(data))
 }
+
+export const deleteWatch = (watch_id) => {
+    return fetch(`http://localhost:8000/watches/${watch_id}`, {
+        method: "DELETE",
+        headers: {
+            "Authorization": `Token ${localStorage.getItem("lu_token")}`
+        }
+    })
+}
+
+export const saveWatch = (watch_id) => {
+    return fetch(`http://localhost:8000/favoritewatches/${watch_id}`, {
+        method: "POST",
+        headers: {
+            "Authorization": `Token ${localStorage.getItem("lu_token")}`
+        }
+    })
+}
