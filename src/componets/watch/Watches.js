@@ -195,17 +195,17 @@ export const Watches = () => {
                                             </div>
                                             <div className="fb-p1-main">
                                                 <div className="post-title">
-                                                    <img src={pfp} />
+                                                    <img src={pfp} alt="" />
                                                     <ul>
-                                                        <li><h3>Aaron Bridell <span> . 2 hours ago</span></h3></li>
+                                                        <li><h3>{watch.customer.user.username}</h3></li>
                                                         <li><span>03 January at 2:11 PM</span></li>
                                                     </ul>
-                                                    <p>Here is some random info about the post I am making.</p>
+                                                    <p>{watch.name}</p>
                                                 </div>
 
                                                 <div className="post-images">
                                                     <div className="post-images1">
-                                                        <img src={watch.image} />
+                                                        <img src={watch.image} alt="nice" />
                                                         <div className="like-comment">
                                                             <ul>
                                                                 <div className="btn-save"><FontAwesomeIcon icon={faHeart} onClick={() => { likeWatch(watch) }} /> </div>
