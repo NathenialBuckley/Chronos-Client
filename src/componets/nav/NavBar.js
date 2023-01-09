@@ -12,7 +12,7 @@ export const NavBar = () => {
             <div className="header-container">
                 <div className="header-wrapper">
                     <div className="logoBox">
-                        <Link to="/watches"><img src={logo} /></Link>
+                        <Link to="/watches"><img src={logo} alt="" /></Link>
                     </div>
                     <div className="searchBox">
                         <input type="search" placeholder="Search for any type, size, style of watch"></input>
@@ -22,7 +22,7 @@ export const NavBar = () => {
                         <Link to="/watches"><i className="fa-solid fa-house"></i></Link>
                         <Link to="/customers"><i className="fa-solid fa-user-group"></i></Link>
                         <Link to="/favoritewatches"><i className="fa-solid fa-video"></i></Link>
-                        <i className="fa-solid fa-crosshairs"></i>
+                        <Link to="./https://krunker.io/?game=NY:pi1yl"><i className="fa-solid fa-crosshairs"></i></Link>
                     </div>
                     <div className="iconBox2">
                         <Link to="/suggestion"><i className="fa-solid fa-circle-plus"></i></Link>

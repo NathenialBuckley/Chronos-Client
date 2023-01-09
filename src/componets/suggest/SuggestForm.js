@@ -10,10 +10,12 @@ export const SuggestionForm = () => {
 
     const [watchTypes, setWatchTypes] = useState([])
 
-    const [currentWatchType, setCurrentWatchType] = useState({
+
+    const [currentWatch, setcurrentWatch] = useState({
         name: "",
         watchtypeId: 0,
         price: "",
+        image: "",
         customerId: ChronosUserObject.id
     })
 
@@ -21,11 +23,28 @@ export const SuggestionForm = () => {
         getAllWatchTypes().then(data => setWatchTypes(data))
     }, [])
 
-    const changeWatchState = (domEvent) => {
-        const copy = { ...currentWatchType }
-        copy.title = domEvent.target.value
-        setCurrentWatchType(copy)
-    }
+    // const changeWatchState = (domEvent) => {
+    //     const copy = { ...currentWatch }
+    //     copy.title = domEvent.target.value
+    //     setcurrentWatch(copy)
+    // }
+
+    // const showWidget = (evt) => {
+    //     evt.preventDefault()
+    //     let widget = window.cloudinary.createUploadWidget({
+    //         cloudName: `dm8zhvlrs`,
+    //         uploadPreset: `pp1nvieo`
+    //     },
+    //         (error, result) => {
+    //             if (!error && result && result.event === "success") {
+    //                 console.log(result.info.url);
+    //                 const copy = { ...currentWatch }
+    //                 copy.image = result.info.url
+    //                 setcurrentWatch(copy)
+    //             }
+    //         });
+    //     widget.open()
+    // }
 
     return (
         <form className="suggestForm">
@@ -34,11 +53,11 @@ export const SuggestionForm = () => {
                 <div className="form-group">
                     <label htmlFor="name">Name: </label>
                     <input type="text" name="name" required autoFocus className="form-control"
-                        value={currentWatchType.name}
+                        value={currentWatch.name}
                         onChange={(evt) => {
-                            const copy = { ...currentWatchType }
+                            const copy = { ...currentWatch }
                             copy.name = evt.target.value
-                            setCurrentWatchType(copy)
+                            setcurrentWatch(copy)
                         }}
                     />
                 </div>
@@ -47,11 +66,11 @@ export const SuggestionForm = () => {
                 <div className="form-group">
                     <label htmlFor="watchtype">Select Type: </label>
                     <select type="number" name="watchtype" required autoFocus className="form-control"
-                        value={currentWatchType.watchtypeId}
+                        value={currentWatch.watchtypeId}
                         onChange={(evt) => {
-                            const copy = { ...currentWatchType }
+                            const copy = { ...currentWatch }
                             copy.watchtypeId = evt.target.value
-                            setCurrentWatchType(copy)
+                            setcurrentWatch(copy)
                         }} >
                         <option value="0"></option>
                         {watchTypes.map((watchType) => {
@@ -68,31 +87,63 @@ export const SuggestionForm = () => {
                 <div className="form-group">
                     <label htmlFor="price">Price: </label>
                     <input type="number" name="price" required autoFocus className="form-control"
-                        value={currentWatchType.price}
+                        value={currentWatch.price}
                         onChange={(evt) => {
-                            const copy = { ...currentWatchType }
+                            const copy = { ...currentWatch }
                             copy.price = evt.target.value
-                            setCurrentWatchType(copy);
+                            setcurrentWatch(copy);
                         }} />
                 </div>
             </fieldset>
+            <fieldset>
+                <div className="form-group">
+                    <label htmlFor="name">URL: </label>
+                    <input type="text" name="name" required autoFocus className="form-control"
+                        value={currentWatch.image}
+                        onChange={(evt) => {
+                            const copy = { ...currentWatch }
+                            copy.image = evt.target.value
+                            setcurrentWatch(copy)
+                        }}
+                    />
+                </div>
+            </fieldset>
+            {/* <fieldset>
+                <div className="form-group">
+                    {watchTypes.map((watchType) => {
+                        return (<>
+                            <img src={watchType.image}></img>
+                            <button
+                                onClick={
+                                    (evt) => {
+                                        showWidget(evt)
+                                    }}
+                                className="btn btn-primary">
+                                URL:
+                            </button>
+                        </>)
+                    })}
+                </div>
+            </fieldset> */}
             <button type="submit"
                 onClick={evt => {
                     evt.preventDefault()
                     const watch = {
-                        name: currentWatchType.name,
-                        watchTypeId: parseInt(currentWatchType.watchtypeId),
-                        price: currentWatchType.price,
-                        customerId: parseInt(currentWatchType.customerId)
+                        name: currentWatch.name,
+                        watchTypeId: parseInt(currentWatch.watchtypeId),
+                        price: currentWatch.price,
+                        image: currentWatch.image,
+                        customerId: parseInt(currentWatch.customerId)
                     }
                     createWatch(watch)
-                        .then(() => navigate("/"))
+                        .then(() => navigate("/watches"))
                 }}
                 className="btn btn-primary">submit
             </button>
-        </form >
+        </form>
     )
 }
+
 
 
 
