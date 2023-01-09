@@ -195,7 +195,7 @@ export const Watches = () => {
                                             </div>
                                             <div className="fb-p1-main">
                                                 <div className="post-title">
-                                                    <img src={pfp} alt="" />
+                                                    <img src={watch.customer.image} alt="" />
                                                     <ul>
                                                         <li><h3>{watch.customer.user.username}</h3></li>
                                                         <li><span>03 January at 2:11 PM</span></li>
