@@ -1,12 +1,8 @@
 import { useEffect, useState } from "react";
 import { getCustomers, updateCustomers } from "../../managers/CustomerManager";
-
-import Alert from 'react-bootstrap/Alert'
 import "./Customer.css"
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Form, InputGroup, Row, Button } from 'react-bootstrap';
 import { useNavigate } from "react-router-dom";
-import { faCaretUp } from "@fortawesome/free-solid-svg-icons";
 
 export const Customers = () => {
     const localClippedUser = localStorage.getItem("clipped_user")
@@ -16,10 +12,15 @@ export const Customers = () => {
     const navigate = useNavigate()
 
     const [form, setForm] = useState({
-        username: "",
-        last_name: "",
         first_name: "",
+        last_name: "",
+        username: "",
         email: "",
+        phone: "",
+        address: "",
+        city: "",
+        state: "",
+        postalCode: "",
         user: ClippedUserObject.id,
     })
 
@@ -27,12 +28,8 @@ export const Customers = () => {
         getCustomers().then(data => setCustomers(data))
     }
 
-
-
-
     useEffect(() => {
         getAllCustomers()
-
     }, [])
 
 
@@ -50,12 +47,12 @@ export const Customers = () => {
                                 type="text"
                                 name="first_name"
                                 className="form-control"
-                                value={customers.first_name}
+                                defaultValue={customers?.user?.first_name}
                                 onChange={
                                     (evt) => {
-                                        const copy = { ...form }
-                                        copy.first_name = evt.target.value
-                                        setForm(copy)
+                                        const copy = { ...customers }
+                                        copy.user.first_name = evt.target.value
+                                        setCustomers(copy)
                                     }
                                 } />
                         </div>
@@ -68,53 +65,71 @@ export const Customers = () => {
                                 type="text"
                                 name="last_name"
                                 className="form-control"
-                                value={customers.last_name}
+                                defaultValue={customers?.user?.last_name}
                                 onChange={
                                     (evt) => {
-                                        const copy = { ...form }
-                                        copy.last_name = evt.target.value
-                                        setForm(copy)
+                                        const copy = { ...customers }
+                                        copy.user.last_name = evt.target.value
+                                        setCustomers(copy)
                                     }
                                 } />
                         </div>
                     </fieldset>
                     <fieldset>
                         <div className="form-group">
-                            <label htmlFor="last_name">Username:</label>
+                            <label htmlFor="username">Username:</label>
                             <input
                                 required autoFocus
                                 type="text"
                                 name="username"
                                 className="form-control"
-                                value={customers.username}
+                                defaultValue={customers?.user?.username}
                                 onChange={
                                     (evt) => {
-                                        const copy = { ...form }
-                                        copy.username = evt.target.value
-                                        setForm(copy)
+                                        const copy = { ...customers }
+                                        copy.user.username = evt.target.value
+                                        setCustomers(copy)
                                     }
                                 } />
                         </div>
                     </fieldset>
                     <fieldset>
                         <div className="form-group">
-                            <label htmlFor="email">Email:</label>
+                            <label htmlFor="email"> Email:</label>
                             <input
                                 required autoFocus
                                 type="email"
                                 name="email"
                                 className="form-control"
-                                value={customers.email}
+                                defaultValue={customers?.user?.email}
                                 onChange={
                                     (evt) => {
-                                        const copy = { ...form }
-                                        copy.email = evt.target.value
-                                        setForm(copy)
+                                        const copy = { ...customers }
+                                        copy.user.email = evt.target.value
+                                        setCustomers(copy)
                                     }
                                 } />
                         </div>
                     </fieldset>
                     {/* <fieldset>
+                        <div className="form-group">
+                            <label htmlFor="image"> PFP:</label>
+                            <input
+                                required autoFocus
+                                type="text"
+                                name="image"
+                                className="form-control"
+                                defaultValue={customers.user.image}
+                                onChange={
+                                    (evt) => {
+                                        const copy = { ...customers}
+                                        copy.image = evt.target.value
+                                        setCustomers(copy)
+                                    }
+                                } />
+                        </div>
+                    </fieldset> */}
+                    <fieldset>
                         <div className="form-group">
                             <label htmlFor="phone">Phone#:</label>
                             <input
@@ -122,12 +137,12 @@ export const Customers = () => {
                                 type="text"
                                 name="phone"
                                 className="form-control"
-                                value={customers.phone}
+                                defaultValue={customers.phone}
                                 onChange={
                                     (evt) => {
-                                        const copy = { ...form }
+                                        const copy = { ...customers }
                                         copy.phone = evt.target.value
-                                        setForm(copy)
+                                        setCustomers(copy)
                                     }
                                 } />
                         </div>
@@ -140,12 +155,12 @@ export const Customers = () => {
                                 type="text"
                                 name="address"
                                 className="form-control"
-                                value={customers.address}
+                                defaultValue={customers.address}
                                 onChange={
                                     (evt) => {
-                                        const copy = { ...form }
+                                        const copy = { ...customers }
                                         copy.address = evt.target.value
-                                        setForm(copy)
+                                        setCustomers(copy)
                                     }
                                 } />
                         </div>
@@ -158,12 +173,12 @@ export const Customers = () => {
                                 type="text"
                                 name="city"
                                 className="form-control"
-                                value={customers.city}
+                                defaultValue={customers.city}
                                 onChange={
                                     (evt) => {
-                                        const copy = { ...form }
+                                        const copy = { ...customers }
                                         copy.city = evt.target.value
-                                        setForm(copy)
+                                        setCustomers(copy)
                                     }
                                 } />
                         </div>
@@ -176,12 +191,12 @@ export const Customers = () => {
                                 type="text"
                                 name="state"
                                 className="form-control"
-                                value={customers.state}
+                                defaultValue={customers.state}
                                 onChange={
                                     (evt) => {
-                                        const copy = { ...form }
+                                        const copy = { ...customers }
                                         copy.state = evt.target.value
-                                        setForm(copy)
+                                        setCustomers(copy)
                                     }
                                 } />
                         </div>
@@ -194,27 +209,32 @@ export const Customers = () => {
                                 type="text"
                                 name="postalCode"
                                 className="form-control"
-                                value={customers.postalCode}
+                                defaultValue={customers.postalCode}
                                 onChange={
                                     (evt) => {
-                                        const copy = { ...form }
+                                        const copy = { ...customers }
                                         copy.postalCode = evt.target.value
-                                        setForm(copy)
+                                        setCustomers(copy)
                                     }
                                 } />
                         </div>
-                    </fieldset> */}
+                    </fieldset>
                 </div>
                 <button type="submit"
-                    onClick={evt => {
+                    onClick={(evt) => {
                         evt.preventDefault()
 
                         const event = {
-                            username: form.username,
-                            last_name: form.last_name,
-                            first_name: form.first_name,
-                            email: form.email,
-                            user: form.user
+                            first_name: customers.user.first_name,
+                            last_name: customers.user.last_name,
+                            username: customers.user.username,
+                            email: customers.user.email,
+                            phone: customers.phone,
+                            address: customers.address,
+                            city: customers.city,
+                            state: customers.state,
+                            postalCode: customers.postalCode,
+                            user: customers.user
                         }
                         updateCustomers(event)
                             .then(() => navigate("/watches"))

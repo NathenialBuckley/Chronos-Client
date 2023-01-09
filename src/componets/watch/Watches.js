@@ -27,6 +27,7 @@ import group3 from "./Assets/gg3.png"
 import game1 from "./Assets/game.png"
 import game2 from "./Assets/game2.png"
 import group from "./Assets/group.jpg"
+import UPFP from "./Assets/user.png"
 
 
 export const Watches = () => {
@@ -41,8 +42,11 @@ export const Watches = () => {
         getAllWatches()
     }, [])
 
-    const likeWatch = () => {
-        saveWatch().then(data => setWatches(data))
+    const likeWatch = (watch) => {
+        saveWatch(watch).then(data => setWatches(data))
+            .then(() => {
+                getAllWatches()
+            })
     }
 
     const removeWatch = (watch) => {
@@ -186,7 +190,7 @@ export const Watches = () => {
                                 </div>
                             </div>
 
-                            {watches.map(
+                            {watches?.map(
                                 (watch) => {
                                     return <div className="fb-post1">
                                         <div className="fb-post1-container">
@@ -195,7 +199,7 @@ export const Watches = () => {
                                             </div>
                                             <div className="fb-p1-main">
                                                 <div className="post-title">
-                                                    <img src={watch.customer.image} alt="" />
+                                                    <img src={watch.customer.image} alt={UPFP} />
                                                     <ul>
                                                         <li><h3>{watch.customer.user.username}</h3></li>
                                                         <li><span>03 January at 2:11 PM</span></li>

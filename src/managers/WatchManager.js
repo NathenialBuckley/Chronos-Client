@@ -47,11 +47,13 @@ export const deleteWatch = (watch_id) => {
     })
 }
 
-export const saveWatch = (watch_id) => {
-    return fetch(`http://localhost:8000/favoritewatches/${watch_id}`, {
+export const saveWatch = (watch) => {
+    return fetch(`http://localhost:8000/favoritewatches`, {
         method: "POST",
         headers: {
+            "Content-Type": "application/json",
             "Authorization": `Token ${localStorage.getItem("lu_token")}`
-        }
+        },
+        body: JSON.stringify(watch)
     })
 }
