@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { getCustomers, updateCustomers } from "../../managers/CustomerManager";
 import "./Customer.css"
-import 'bootstrap/dist/css/bootstrap.min.css';
+// import 'bootstrap/dist/css/bootstrap.min.css';
 import { useNavigate } from "react-router-dom";
 
 export const Customers = () => {
