@@ -1,6 +1,6 @@
 import { Route, Routes } from "react-router-dom"
 import { Login } from "../componets/auth/Login"
-import { Register } from "../componets/auth/register/Register"
+import { Register } from "../componets/auth/Register"
 import { Customers } from "../componets/customer/Customer"
 import { Fwatch } from "../componets/FWatch/FWatch"
 import { SuggestionForm } from "../componets/suggest/SuggestForm"
