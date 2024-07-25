@@ -35,12 +35,12 @@ export const Login = () => {
             <div className="bg-gray-100 flex rounded-2xl shadow-lg max-w-3xl p-5 items-center">
                 {/* Form */}
                 <div className="md:w-1/2 px-8">
-                    <h2 className="font-bold text-[#132B4F]">Login</h2>
+                    <h2 className="font-bold text-[#132B4F] text-2xl">Login</h2>
                     <p className="text-sm mt-4 text-[#132B4F]">If You Are Already A Member, Easily Log In</p>
 
                     <form action="" className="flex flex-col gap-4">
-                        <input className="p-2 mt-8 rounded-xl border" type="text" name="email" placeholder="Email" />
-                        <input className="p-2 rounded-xl border" type="password" name="password" placeholder="Password" />
+                        <input className="p-2 mt-8 rounded-xl border w-full" type="text" name="email" placeholder="Email" />
+                        <input className="p-2 rounded-xl border w-full" type="password" name="password" placeholder="Password" />
                         <button className="bg-[#1B5060] rounded-xl text-white py-2 hover:scale-105 duration-300">Log in</button>
                     </form>
                     <div className="mt-10 grid grid-cols-3 items-center text-gray-500">
@@ -63,7 +63,7 @@ export const Login = () => {
 
                 {/* Image */}
                 <div className="md:block hidden w-1/2">
-                    <img className="rounded-2xl" src={LoginWatch} />
+                    <img className="rounded-2xl" src={LoginWatch} alt="Login Illustration" />
                 </div>
             </div>
         </section>
