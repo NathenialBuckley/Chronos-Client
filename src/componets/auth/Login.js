@@ -1,47 +1,47 @@
-import React, { useRef } from "react"
+import React, { useRef } from "react";
 import { Link } from "react-router-dom";
-import { useNavigate } from "react-router-dom"
+import { useNavigate } from "react-router-dom";
 import { loginUser } from "../../managers/AuthManager";
-import LoginWatch from "./assets/watch2jpg.jpg"
+import LoginWatch from "./assets/watch2jpg.jpg";
 
-import "./Login.css"
+import "./Login.css";
 
 export const Login = () => {
-    const username = useRef()
-    const password = useRef()
-    const invalidDialog = useRef()
-    const navigate = useNavigate()
+    const username = useRef();
+    const password = useRef();
+    const invalidDialog = useRef();
+    const navigate = useNavigate();
 
     const handleLogin = (e) => {
-        e.preventDefault()
+        e.preventDefault();
         const user = {
             username: username.current.value,
             password: password.current.value
-        }
+        };
         loginUser(user)
             .then(res => {
                 if ("valid" in res && res.valid && "token" in res) {
-                    localStorage.setItem("lu_token", res.token)
-                    navigate("/watches")
+                    localStorage.setItem("lu_token", res.token);
+                    navigate("/watches");
+                } else {
+                    invalidDialog.current.showModal();
                 }
-                else {
-                    invalidDialog.current.showModal()
-                }
-            })
-    }
-    return (
-        <section className="bg-gray-50 min-h-screen flex items-center justify-center">
-            {/* Login Container */}
-            <div className="bg-gray-100 flex rounded-2xl shadow-lg max-w-3xl p-5 items-center">
-                {/* Form */}
-                <div className="md:w-1/2 px-8">
-                    <h2 className="font-bold text-[#132B4F] text-2xl">Login</h2>
-                    <p className="text-sm mt-4 text-[#132B4F]">If You Are Already A Member, Easily Log In</p>
+            });
+    };
 
-                    <form action="" className="flex flex-col gap-4">
-                        <input className="p-2 mt-8 rounded-xl border w-full" type="text" name="email" placeholder="Email" />
-                        <input className="p-2 rounded-xl border w-full" type="password" name="password" placeholder="Password" />
-                        <button className="bg-[#1B5060] rounded-xl text-white py-2 hover:scale-105 duration-300">Log in</button>
+    return (
+        <section className="bg-gradient">
+            {/* Login Container */}
+            <div className="login-container">
+                {/* Form */}
+                <div className="form-container">
+                    <h2 className="font-bold text-[#1B5060] text-2xl">Login</h2>
+                    <p className="text-sm mt-4 text-[#1B5060]">If You Are Already A Member, Easily Log In</p>
+
+                    <form className="flex flex-col gap-4" onSubmit={handleLogin}>
+                        <input ref={username} type="text" id="username" className="p-2 mt-8 rounded-xl border w-full" name="username" placeholder="Username" required autoFocus />
+                        <input ref={password} type="password" id="password" className="p-2 rounded-xl border w-full" name="password" placeholder="Password" required />
+                        <button className="bg-[#1B5060] rounded-xl text-white py-2 hover:scale-105 duration-300" type="submit">Log in</button>
                     </form>
                     <div className="mt-10 grid grid-cols-3 items-center text-gray-500">
                         <hr className="border-gray-500" />
@@ -57,15 +57,21 @@ export const Login = () => {
 
                     <div className="mt-3 text-xs flex justify-between items-center">
                         <p>If you Don't Have An Account?</p>
-                        <button className="py-2 px-5 bg-white border rounded-xl hover:scale-110 duration-300">Register</button>
+                        <Link to="/register"><button className="py-2 px-5 bg-white border rounded-xl hover:scale-110 duration-300">Register</button></Link>
                     </div>
                 </div>
 
                 {/* Image */}
-                <div className="md:block hidden w-1/2">
+                <div className="image-container">
                     <img className="rounded-2xl" src={LoginWatch} alt="Login Illustration" />
                 </div>
             </div>
+
+            {/* Invalid login dialog */}
+            <dialog ref={invalidDialog} className="rounded-xl border p-4">
+                <p>Invalid login credentials. Please try again.</p>
+                <button onClick={() => invalidDialog.current.close()}>Close</button>
+            </dialog>
         </section>
-    )
-}
+    );
+};
