@@ -1,9 +1,8 @@
 import React, { useRef } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { registerUser } from "../../managers/AuthManager";
-import RegisterWatch from "./assets/registerwatch.jpg";
 
-import "./Login.css"; // Assuming you have some styles defined
+import "./Login.css";
 
 export const Register = () => {
     const firstName = useRef();
@@ -33,7 +32,7 @@ export const Register = () => {
                 "city": city.current.value,
                 "state": state.current.value,
                 "phone": phone.current.value,
-                "postalCode": postalCode.current.value, // Changed to match the key
+                "postalCode": postalCode.current.value,
                 "address": address.current.value
             };
 
