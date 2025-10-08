@@ -10,6 +10,7 @@ export const Login = () => {
     const username = useRef();
     const password = useRef();
     const invalidDialog = useRef();
+    const [errorMessage, setErrorMessage] = React.useState("");
     const navigate = useNavigate();
 
     const handleLogin = (e) => {
@@ -24,8 +25,16 @@ export const Login = () => {
                     localStorage.setItem("lu_token", res.token);
                     navigate("/watches");
                 } else {
+                    setErrorMessage((res && res.message) ? res.message : "Invalid credentials");
                     invalidDialog.current.showModal();
                 }
+            })
+            .catch(err => {
+                // Show HTTP errors (404, 500) or network errors
+                const msg = err && err.status ? `Error ${err.status}: ${err.statusText || ''} ${err.body ? JSON.stringify(err.body) : ''}` : (err.message || 'Network error');
+                setErrorMessage(msg);
+                invalidDialog.current.showModal();
+                console.error('Login error:', err);
             });
     };
 
@@ -69,8 +78,8 @@ export const Login = () => {
 
             {/* Invalid login dialog */}
             <dialog ref={invalidDialog} className="rounded-xl border p-4">
-                <p>Invalid login credentials. Please try again.</p>
-                <button onClick={() => invalidDialog.current.close()}>Close</button>
+                    <p>{errorMessage || 'Invalid login credentials. Please try again.'}</p>
+                    <button onClick={() => invalidDialog.current.close()}>Close</button>
             </dialog>
         </section>
     );
